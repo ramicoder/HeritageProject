@@ -15,9 +15,5 @@ public class HeritageApp extends Application {
         stage.setScene(scene);
         stage.show();
     }
-static String Aran = "Aran";
-    public static void main(String[] args) {
-        launch();
-    }
 
 }

@@ -40,4 +40,27 @@ public class HeritageController {
         allSites.add(new HeritageSite("Barda Balka", "Chemchemal", "Paleolithic", "Archaeological", "Tools"));
         allSites.add(new HeritageSite("Halamata Cave", "Duhok", "Assyrian", "Archaeological", "Reliefs"));
     }
+    // Option 2: Schedule a Visit
+    public void scheduleVisit(String category, String siteName, String name, String id, String phone, java.time.LocalDate date) {
+
+        // 1. Check traffic: How many times has this ID visited?
+        // (We use 'long' because the count() method returns a long number)
+        long count = allVisits.stream().filter(v -> v.getVisitorId().equals(id)).count();
+
+        // 2. If limit reached (2 or more), generate fake verification code
+        if (count >= 2) {
+            int code = 100000 + new java.util.Random().nextInt(900000);
+            System.out.println("Traffic Control: Limit reached for ID " + id);
+            System.out.println("Verification Code sent to " + phone + ": " + code);
+        }
+
+        // 3. Create the Visit object
+        Visit newVisit = new Visit(category, siteName, name, id, phone, date);
+
+        // 4. Add to Memory
+        allVisits.add(newVisit);        // Main Database
+        recentBookings.push(newVisit);  // Stack for "Recent Bookings"
+
+        System.out.println("Scheduled: " + name + " to " + siteName);
+    }
 }

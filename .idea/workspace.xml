@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34cabb51-2552-485f-ab94-eb3b3e64f8d7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageSite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" afterDir="false" />
-    </list>
+    <list default="true" id="34cabb51-2552-485f-ab94-eb3b3e64f8d7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

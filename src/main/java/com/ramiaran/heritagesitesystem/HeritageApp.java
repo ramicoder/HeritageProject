@@ -1,5 +1,4 @@
 package com.ramiaran.heritagesitesystem;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,12 +11,13 @@ public class HeritageApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HeritageApp.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Heritage Site");
         stage.setScene(scene);
         stage.show();
     }
-
+static String Aran = "Aran";
     public static void main(String[] args) {
         launch();
     }
+
 }

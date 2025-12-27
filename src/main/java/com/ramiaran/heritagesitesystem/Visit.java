@@ -1,7 +1,7 @@
 package com.ramiaran.heritagesitesystem;
 
 import java.time.LocalDate;
-
+// The data types are private for security and control purposes, this way they are read-only and not changeable by other areas of our data.
 public class Visit {
     private String category;
     private String siteName;
@@ -27,3 +27,4 @@ public class Visit {
     public String getPhoneNumber() { return phoneNumber; } // Added getter
     public LocalDate getVisitDate() { return visitDate; }
 }
+// 25/12/2025, added the visit class

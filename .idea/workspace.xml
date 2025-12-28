@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="34cabb51-2552-485f-ab94-eb3b3e64f8d7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ramiaran/heritagesitesystem/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ramiaran/heritagesitesystem/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +128,7 @@
       <workItem from="1766860178176" duration="36000" />
       <workItem from="1766860544492" duration="11000" />
       <workItem from="1766866714580" duration="5508000" />
-      <workItem from="1766911376854" duration="4204000" />
+      <workItem from="1766911376854" duration="11310000" />
     </task>
     <servers />
   </component>

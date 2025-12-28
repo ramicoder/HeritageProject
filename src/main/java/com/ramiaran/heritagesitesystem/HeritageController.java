@@ -47,28 +47,58 @@ public class HeritageController {
     }
 
 
-    // Option 2: Schedule a Visit Rami - Aran
-    public void scheduleVisit(String category, String siteName, String name, String id, String phone, java.time.LocalDate date) {
+    // Option 2: Schedule a Visit - rami aran
+    public String scheduleVisit(String category, String siteName, String name, String id, String phone, java.time.LocalDate date) {
+        // validation check, making sure no empty input is done
+        if (category == null || siteName == null || name.isBlank() || id.isBlank() || phone.isBlank() || date == null) {
+            return "Error: All fields are required.";
+        }
+        // validate that date is not in the past
+        if (date.isBefore(java.time.LocalDate.now())) {
+            return "Error: You cannot book a visit in the past.";
+        }
+        StringBuilder bob = new StringBuilder();
 
-        // 1. Check traffic: How many times has this ID visited?
-        // (We use 'long' because the count() method returns a long number)
-        long count = allVisits.stream().filter(v -> v.getVisitorId().equals(id)).count();
+        // 1. counting how many times the visitor visited based on the id
+        int count = 0;
+        for (Visit v : allVisits) {
+            if (v.getVisitorId().equalsIgnoreCase(id)) {
+                count++;
+            }
+        }
 
-        // 2. If limit reached (2 or more), generate fake verification code
+        // 2. if visitor count reached 2 or more, generate verification code
         if (count >= 2) {
             int code = 100000 + new java.util.Random().nextInt(900000);
-            System.out.println("Traffic Control: Limit reached for ID " + id);
-            System.out.println("Verification Code sent to " + phone + ": " + code);
+            bob.append("Traffic Warning: Frequent Visitor Limit (").append(count).append(")\n");
+            bob.append("Verification Code sent to ").append(phone).append(": ").append(code).append("\n");
         }
 
         // 3. Create the Visit object
         Visit newVisit = new Visit(category, siteName, name, id, phone, date);
 
-        // 4. Add to Memory
-        allVisits.add(newVisit);        // Main Database
-        recentBookings.push(newVisit);  // Stack for "Recent Bookings"
+        // 4. Adding the new visit to the bookings stack and all visits linked list
+        allVisits.add(newVisit);
+        recentBookings.push(newVisit);
 
-        System.out.println("Scheduled: " + name + " to " + siteName);
+        // 5. Final Success Message
+        bob.append("Scheduled: ").append(name).append(" to ").append(siteName);
+
+        // Return String for UI
+        return bob.toString();
+    }
+    // Option 2 Helper: Used by the UI to filter sites in the Dropdown
+    public java.util.List<String> getSiteNamesByCategory(String category) {
+        java.util.List<String> names = new java.util.ArrayList<>();
+
+        // Loop through all sites
+        for (HeritageSite site : allSites) {
+            // if the site matches the category (e.g., "Museum"), add its name to the list
+            if (site.getCategory().equalsIgnoreCase(category)) {
+                names.add(site.getName());
+            }
+        }
+        return names; // give the needed list back to the UI
     }
     //option 3 is to cancel a visit based on a category, site name, and visitor id- Aran
 public boolean cancelVisit(String category, String siteName, String visitorId){
@@ -98,26 +128,29 @@ return false;
 
     // Option 4: View Visits (Return String for UI) -Rami
     public String viewVisits(String category, boolean ascending) {
-        StringBuilder bob = new StringBuilder(); // Builds the text for the UI
+        StringBuilder bob = new StringBuilder(); // builds the text for the UI
         bob.append("--- Visit Report: ").append(category).append(" ---\n");
 
         // 1. Filter: specific category only
         // We use a temporary list so we don't mess up the main 'allVisits' list
         LinkedList<Visit> filteredList = new LinkedList<>();
         for (Visit v : allVisits) {
-            // DSA: Linear Search O(N)
+            // using a linear search to traverse through our linked list and add it to our new list if matching the category
             if (v.getCategory().equalsIgnoreCase(category)) {
                 filteredList.add(v);
             }
         }
 
         // 2. Sort: Explicit Comparator
+        //soring with timsort(a combination of merge and insertion sort with a big O of Nlog(N))
+        //the lamba expression is its syntax which sorts based on the compareto values when comparing the dates
         filteredList.sort((v1, v2) -> {
             if (ascending) return v1.getVisitDate().compareTo(v2.getVisitDate());
             else return v2.getVisitDate().compareTo(v1.getVisitDate());
         });
 
         // 3. Build String
+        //if no visits, returning no visits found otherwise return the visits' sites, visitor names and dates with the stringbuilder.
         if (filteredList.isEmpty()) {
             bob.append("No visits found for this category.");
         } else {
@@ -139,12 +172,13 @@ return false;
 
         // 1. Get unique categories
         LinkedList<String> categories = new LinkedList<>(); // We did an Array initially, but AI recommended that we use a linked list for cleanliness and efficiency.
-        for (HeritageSite site : allSites) {
+        for (HeritageSite site : allSites) { //we traverse through all sites and get the unique categories instead of having redundancy
             boolean exists = false;
             for(String c : categories) {
-                if(c.equalsIgnoreCase(site.getCategory()))
+                if(c.equalsIgnoreCase(site.getCategory())){
                     exists = true;
-                break;
+                    break; //once we get the category we break because we don't need to go through the other categories after we found one matching
+                }
             }
             if (!exists) categories.add(site.getCategory());
         }
@@ -160,7 +194,7 @@ return false;
             }
             bob.append(cat).append(": ").append(catCount).append(" total visits\n");
 
-            // 3. Loop through Sites in this Category
+            // 3. same logic as for category but for sites now
             for (HeritageSite site : allSites) {
                 if (site.getCategory().equalsIgnoreCase(cat)) {
                     int siteCount = 0;
@@ -286,13 +320,16 @@ return false;
         String topCategory = "None";
         int maxCatCount = -1;
 
-        // Get unique categories manually (no streams)
+        // Get unique categories manually using a new linked list
+        // also no worries if matches same name as another linked list because this is declared locally so the scoping took care of that
         LinkedList<String> categories = new LinkedList<>();
+        //we use a nested loop to only get the unique categories within all our sites like what we did in option 5
         for (HeritageSite s : allSites) {
             boolean present = false;
             for (String c : categories) {
                 if (c.equalsIgnoreCase(s.getCategory())) {
                     present = true;
+                    break;
                 }
             }
             if (!present) {
@@ -308,7 +345,7 @@ return false;
                     count++;
                 }
             }
-
+            // we find the name for the category with most visits and its visit count
             if (count > maxCatCount) {
                 maxCatCount = count;
                 topCategory = cat;
@@ -321,7 +358,7 @@ return false;
                 .append(maxCatCount)
                 .append(" visits)\n");
 
-        // --- Find Top Site ---
+        // same logic as above but with site
         String topSite = "None";
         int maxSiteCount = -1;
 

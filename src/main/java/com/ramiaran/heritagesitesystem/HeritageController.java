@@ -8,18 +8,59 @@ import java.util.Iterator;
 
 public class HeritageController {
 
+    // The variables for our UI components  -Rami
+    // They link our Java code to the specific boxes on the screen.
+    // If the FXML file has fx:id="nameField", this variable grabs it.
+    @FXML private javafx.scene.control.ComboBox<String> categoryBox; // The dropdown for categories
+    @FXML private javafx.scene.control.ComboBox<String> siteBox;     // The dropdown for specific sites
+    @FXML private javafx.scene.control.TextField nameField;          // Input box for visitor Name
+    @FXML private javafx.scene.control.TextField idField;            // Input box for visitor ID
+    @FXML private javafx.scene.control.TextField phoneField;         // Input box for phone number
+    @FXML private javafx.scene.control.DatePicker datePicker;        // The calendar popup
+    @FXML private javafx.scene.control.TextArea feedbackArea;        // The big text box at the bottom for messages/errors
+    @FXML private javafx.scene.control.TextField searchField;        // Input for search
+    @FXML private javafx.scene.control.CheckBox ascendingCheck;      // Checkbox for sorting
+    @FXML private javafx.scene.control.ComboBox<String> viewCategoryBox; // Filter dropdown for Option 4
+
+    // This is for the tableview holding value of the visit object we made
+    @FXML private javafx.scene.control.TableView<Visit> resultsTable;
+
+    // These columns tell the table which part of the Visit object to show.
+    @FXML private javafx.scene.control.TableColumn<Visit, String> colName;     // Shows visit.getVisitorName()
+    @FXML private javafx.scene.control.TableColumn<Visit, String> colSite;     // Shows visit.getSiteName()
+    @FXML private javafx.scene.control.TableColumn<Visit, String> colCategory; // Shows visit.getCategory()
+    @FXML private javafx.scene.control.TableColumn<Visit, String> colDate;     // Shows visit.getVisitDate()
+
+    // This method is created so that JavaFX runs it automatically when the screen opens.
+    // We use it to set up the starting state of the app.
+    @FXML
+    public void initialize() {
+        initializeSites(); // Calls our existing method to load the 12 heritage sites into memory.
+
+        // Add the 3 options to the Category Dropdown so the user can pick them.
+        categoryBox.getItems().addAll("Historical", "Museum", "Archaeological");
+        viewCategoryBox.getItems().addAll("Historical", "Museum", "Archaeological");
+
+        // This code is ran when a user picks a category
+        categoryBox.setOnAction(e -> {
+            String selected = categoryBox.getValue(); // Get what they picked
+            // If they picked something, find the matching sites and put them in the Site Dropdown.
+            if (selected != null) {
+                siteBox.getItems().setAll(getSiteNamesByCategory(selected));
+            }
+        });
+
+        // This connects the Table Columns to our Visit.java class.
+        // "visitorName" must match the variable name in our Visit class exactly!
+        colName.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("visitorName"));
+        colSite.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("siteName"));
+        colCategory.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("category"));
+        colDate.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("visitDate"));
+    }
 
     private LinkedList<Visit> allVisits = new LinkedList<>();
     private Stack<Visit> recentBookings = new Stack<>();
     private LinkedList<HeritageSite> allSites = new LinkedList<>();
-
-    @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 
     // Initialize the 12 required sites
     public void initializeSites() {
@@ -126,10 +167,8 @@ return false;
 
     }
 
-    // Option 4: View Visits (Return String for UI) -Rami
-    public String viewVisits(String category, boolean ascending) {
-        StringBuilder bob = new StringBuilder(); // builds the text for the UI
-        bob.append("--- Visit Report: ").append(category).append(" ---\n");
+    // Option 4: View Visits (Return list for UI) -Rami
+    public LinkedList<Visit> viewVisits(String category, boolean ascending) {
 
         // 1. Filter: specific category only
         // We use a temporary list so we don't mess up the main 'allVisits' list
@@ -148,20 +187,8 @@ return false;
             if (ascending) return v1.getVisitDate().compareTo(v2.getVisitDate());
             else return v2.getVisitDate().compareTo(v1.getVisitDate());
         });
-
-        // 3. Build String
-        //if no visits, returning no visits found otherwise return the visits' sites, visitor names and dates with the stringbuilder.
-        if (filteredList.isEmpty()) {
-            bob.append("No visits found for this category.");
-        } else {
-            for (Visit v : filteredList) {
-                bob.append(v.getSiteName().trim()).append(" | ")
-                        .append(v.getVisitorName().trim()).append(" | ")
-                        .append(v.getVisitDate()).append("\n");
-            }
-        }
-
-        return bob.toString(); // Send this text to the UI
+        // Return the list to the UI
+        return filteredList;
     }
 
 
@@ -385,5 +412,90 @@ return false;
         return bob.toString();
     }
 
+    // These methods run when you click the buttons in the GUI.
+
+    @FXML
+    void onScheduleClick() {
+        // 1. Call the existing logic method
+        String result = scheduleVisit(
+                categoryBox.getValue(),
+                siteBox.getValue(),
+                nameField.getText(),
+                idField.getText(),
+                phoneField.getText(),
+                datePicker.getValue()
+        );
+        // 2. Show the result in the big text area
+        feedbackArea.setText(result);
+    }
+
+    @FXML
+    void onCancelClick() {
+        boolean success = cancelVisit(categoryBox.getValue(), siteBox.getValue(), idField.getText());
+
+        if (success) {
+            feedbackArea.setText("Success: Visit for visitor " + idField.getText() + " has been cancelled.");
+        } else {
+            feedbackArea.setText("Error: Could not cancel. Check Category, Site, and ID.");
+        }
+    }
+
+    @FXML
+    void onExitClick() {
+        // This is real logic: It shuts down the Java program.
+        System.exit(0);
+    }
+
+    @FXML
+    void onSearchClick() {
+        // 1. Get the list from your logic
+        java.util.LinkedList<Visit> found = searchVisitor(searchField.getText(), searchField.getText());
+
+        // 2. Clear table and add new data
+        resultsTable.getItems().clear();
+        resultsTable.getItems().addAll(found);
+
+        // 3. User feedback
+        if(found.isEmpty()) feedbackArea.setText("Search: No visitors found.");
+        else feedbackArea.setText("Search: Found " + found.size() + " records.");
+    }
+
+    @FXML
+    void onViewVisitsClick() {
+        String cat = viewCategoryBox.getValue();
+        if (cat == null) {
+            feedbackArea.setText("Error: Please select a Category to filter.");
+            return;
+        }
+
+        // 1. Call your logic method (It handles sorting & filtering now)
+        LinkedList<Visit> data = viewVisits(cat, ascendingCheck.isSelected());
+
+        // 2. Give the list to the Table
+        resultsTable.getItems().setAll(data);
+        feedbackArea.setText("Showing " + data.size() + " visits for " + cat);
+    }
+
+    @FXML
+    void onRecentClick() {
+        // 1. Get the list from your existing method
+        java.util.LinkedList<Visit> recent = getRecentVisits();
+
+        // 2. Update Table
+        resultsTable.getItems().setAll(recent);
+        feedbackArea.setText("Showing " + recent.size() + " most recent bookings.");
+    }
+
+    @FXML
+    void onTotalsClick() {
+        String report = displayTotals();
+        feedbackArea.setText(report);
+    }
+
+    @FXML
+    void onSummaryClick() {
+        String report = generateSummaryReport();
+        feedbackArea.setText(report);
+    }
 
 }

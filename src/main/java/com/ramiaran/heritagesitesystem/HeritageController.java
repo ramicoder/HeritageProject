@@ -111,7 +111,7 @@ public class HeritageController {
         for (Visit v : allVisits) {
             if (v.getVisitorId().equalsIgnoreCase(id)) {
                 // We found the ID. Now ensure the name matches the original owner.
-                if (!v.getVisitorName().equalsIgnoreCase(name) || !v.getPhoneNumber().equalsIgnoreCase(phone)) {
+                if (!v.getVisitorName().equalsIgnoreCase(name)) {
                     return "Error: ID " + id + " is already registered to " + v.getVisitorName() + ".";
                 }
             }
@@ -141,8 +141,8 @@ public class HeritageController {
         // 2. if visitor count reached 2 or more, generate verification code
         if (count >= 2) {
             int code = 100000 + new java.util.Random().nextInt(900000);
-            bob.append("Traffic Warning: Frequent Visitor Limit (").append(count).append(")\n");
-            bob.append("Verification Code sent to ").append(phone).append(": ").append(code).append("\n");
+            bob.append("You are qualified for a free guided tour! The following code is your reference\n");
+            bob.append("Confirmation Code sent to ").append(phone).append(": ").append(code).append("\n");
         }
 
         // 3. Create the Visit object
@@ -517,6 +517,9 @@ public class HeritageController {
         // 3. User feedback
         if(found.isEmpty()) feedbackArea.setText("Search: No visitors found.");
         else feedbackArea.setText("Search: Found " + found.size() + " records.");
+
+        // 4. Clear input field
+        searchField.clear();
     }
 
     @FXML

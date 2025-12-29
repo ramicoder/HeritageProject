@@ -61,7 +61,7 @@
             <VBox spacing="10" style="-fx-padding: 15;">
                 <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #dfe6e9; -fx-padding: 10;">
                     <Label text="Search:"/>
-                    <TextField fx:id="searchField" promptText="Name or ID" HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="searchField" promptText="Enter ID" HBox.hgrow="ALWAYS"/>
                     <Button text="Search (Opt 6)" onAction="#onSearchClick"/>
                 </HBox>
 

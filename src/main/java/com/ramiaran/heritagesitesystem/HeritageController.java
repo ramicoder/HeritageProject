@@ -158,6 +158,7 @@ public class HeritageController {
         // Return String for UI
         return bob.toString();
     }
+
     // Option 2 Helper: Used by the UI to filter sites in the Dropdown
     public java.util.List<String> getSiteNamesByCategory(String category) {
         java.util.List<String> names = new java.util.ArrayList<>();
@@ -171,6 +172,7 @@ public class HeritageController {
         }
         return names; // give the needed list back to the UI
     }
+
     //option 3 is to cancel a visit based on a category, site name, and visitor id- Aran
     public boolean cancelVisit(String category, String siteName, String visitorId){
         if (category == null || siteName == null || visitorId == null)
@@ -224,9 +226,11 @@ public class HeritageController {
         return filteredList;
     }
 
-
     // Option 5: Display Totals (Return String for UI)- Rami
     public String displayTotals() {
+        if (allVisits.isEmpty()) {
+            return "--- System Totals ---\nNo visits recorded yet.";
+        }
         StringBuilder bob = new StringBuilder();
         bob.append("--- System Totals ---\n");
 
@@ -317,10 +321,8 @@ public class HeritageController {
                 SearchResult.add(v);
             }
         }
-
         return SearchResult;
     }
-
 
     // Option 7: Get the most recently scheduled visits - Aran
     /*
@@ -374,6 +376,10 @@ public class HeritageController {
 
     // Option 8: Summary Report (Return String for UI) -Rami
     public String generateSummaryReport() {
+
+        if (allVisits.isEmpty()) {
+            return "--- Intelligence Report ---\nNo visits recorded yet.";
+        }
 
         StringBuilder bob = new StringBuilder();
         bob.append("--- Intelligence Report ---\n");
@@ -526,9 +532,9 @@ public class HeritageController {
         if (data.isEmpty()) {
             feedbackArea.setText("No visits found for this category.");
         } else {
-            // 2. Give the list to the Table
-            resultsTable.getItems().setAll(data);
-            feedbackArea.setText("Showing " + data.size() + " visits for " + cat);
+        // 2. Give the list to the Table
+        resultsTable.getItems().setAll(data);
+        feedbackArea.setText("Showing " + data.size() + " visits for " + cat);
         }
     }
 
@@ -539,7 +545,12 @@ public class HeritageController {
 
         // 2. Update Table
         resultsTable.getItems().setAll(recent);
-        feedbackArea.setText("Showing " + recent.size() + " most recent bookings.");
+        // 3. Update feedback area
+        if (recent.isEmpty()) {
+            feedbackArea.setText("No recent bookings yet.");
+        } else {
+            feedbackArea.setText("Showing " + recent.size() + " most recent bookings.");
+        }
     }
 
     @FXML

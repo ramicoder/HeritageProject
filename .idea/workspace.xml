@@ -129,7 +129,7 @@
       <workItem from="1766860178176" duration="36000" />
       <workItem from="1766860544492" duration="11000" />
       <workItem from="1766866714580" duration="5508000" />
-      <workItem from="1766911376854" duration="19599000" />
+      <workItem from="1766911376854" duration="21455000" />
     </task>
     <servers />
   </component>
@@ -152,7 +152,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>
-          <line>542</line>
+          <line>552</line>
           <properties class="com.ramiaran.heritagesitesystem.HeritageController" method="onTotalsClick">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -161,22 +161,36 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>
-          <line>479</line>
+          <line>481</line>
           <properties class="com.ramiaran.heritagesitesystem.HeritageController" method="onCancelClick">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>
+          <line>518</line>
+          <properties class="com.ramiaran.heritagesitesystem.HeritageController" method="onViewVisitsClick">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>
-          <line>486</line>
+          <line>488</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>
-          <line>207</line>
+          <line>209</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>
+          <line>465</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

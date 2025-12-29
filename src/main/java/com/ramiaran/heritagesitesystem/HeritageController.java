@@ -2,6 +2,8 @@ package com.ramiaran.heritagesitesystem;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.Iterator;
@@ -56,6 +58,25 @@ public class HeritageController {
         colSite.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("siteName"));
         colCategory.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("category"));
         colDate.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("visitDate"));
+
+        // Allow user to click a row in the "All Visits" Table to auto-fill the cancel visit fields
+        resultsTable.setRowFactory(tv -> {
+            javafx.scene.control.TableRow<Visit> row = new javafx.scene.control.TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) { // Single click on a non-empty row
+                    Visit clickedVisit = row.getItem();
+
+                    // Auto-fill the cancel visit fields
+                    categoryBox.setValue(clickedVisit.getCategory());
+                    siteBox.setItems(javafx.collections.FXCollections.observableArrayList(
+                            getSiteNamesByCategory(clickedVisit.getCategory())
+                    ));
+                    siteBox.setValue(clickedVisit.getSiteName());
+                    idField.setText(clickedVisit.getVisitorId());
+                }
+            });
+            return row;
+        });
     }
 
     private LinkedList<Visit> allVisits = new LinkedList<>();
@@ -487,6 +508,7 @@ public class HeritageController {
 
         if (categoryBox.getValue() == null || siteBox.getValue() == null || idField.getText().isBlank()) {
             feedbackArea.setText("Error: Please select a category, site, and enter visitor ID.");
+            clearInputs();
             return; // stop further execution because of empty values
         }
 
@@ -497,6 +519,7 @@ public class HeritageController {
         } else {
             feedbackArea.setText("Error: Could not cancel. Check Category, Site, and ID.");
         }
+        clearInputs();
     }
 
     @FXML

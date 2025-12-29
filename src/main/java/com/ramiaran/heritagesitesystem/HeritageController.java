@@ -87,7 +87,6 @@ public class HeritageController {
         return new String[]{"Historical Sites", "Museums", "Archaeological Sites"}; // This is displaying the heritage site categories and the input is taken in the UI
     }
 
-
     // Option 2: Schedule a Visit - rami aran
     public String scheduleVisit(String category, String siteName, String name, String id, String phone, java.time.LocalDate date) {
         // validation check, making sure no empty input is done
@@ -98,7 +97,38 @@ public class HeritageController {
         if (date.isBefore(java.time.LocalDate.now())) {
             return "Error: You cannot book a visit in the past.";
         }
+        if (!phone.matches("07\\d{9}")) {
+            return "Error: Phone number must be exactly 11 digits and an Iraqi number.";
+        }
+        // 4. Check ID (Numeric only)
+        if (!id.matches("\\d+")) {
+            return "Error: ID must be numeric.";
+        }
+        name = name.trim();
+        id = id.trim();
+        phone = phone.trim();
+        // VALIDATION: Check for ID Conflict
+        for (Visit v : allVisits) {
+            if (v.getVisitorId().equalsIgnoreCase(id)) {
+                // We found the ID. Now ensure the name matches the original owner.
+                if (!v.getVisitorName().equalsIgnoreCase(name) || !v.getPhoneNumber().equalsIgnoreCase(phone)) {
+                    return "Error: ID " + id + " is already registered to " + v.getVisitorName() + ".";
+                }
+            }
+        }
         StringBuilder bob = new StringBuilder();
+
+        //preventing duplicate visits
+        for (Visit v : allVisits) {
+            if (
+                    v.getCategory().equalsIgnoreCase(category) &&
+                            v.getSiteName().equalsIgnoreCase(siteName) &&
+                            v.getVisitorId().equalsIgnoreCase(id) &&
+                            v.getVisitDate().equals(date)
+            ) {
+                return "Error: This visit is already scheduled for this date.";
+            }
+        }
 
         // 1. counting how many times the visitor visited based on the id
         int count = 0;
@@ -142,29 +172,32 @@ public class HeritageController {
         return names; // give the needed list back to the UI
     }
     //option 3 is to cancel a visit based on a category, site name, and visitor id- Aran
-public boolean cancelVisit(String category, String siteName, String visitorId){
-if (category == null || siteName == null || visitorId == null)
-    return false;
-if (category.isBlank() || siteName.isBlank() || visitorId.isBlank())
-    return false; //line 67-68 are just validators in order to make sure there is something to delete
-Iterator<Visit> pointer = allVisits.iterator();
-while (pointer.hasNext()){
-  Visit v = pointer.next(); // v is the current visit it is pointing at
-    // hasNext() checks if theres an element after the current one
-    // Next moves the pointer to the next element
-    // the following loop is to compare using the getters in "Visit" to make sure we are deleting the correct visit, and it gives the metehod a return value
-    if (
-            v.getCategory().equalsIgnoreCase(category) &&
-                    v.getSiteName().equalsIgnoreCase(siteName) &&
-                    v.getVisitorId().equalsIgnoreCase(visitorId)
-    ){
-        pointer.remove(); //Safe Deletion, not masking.
-        return true;
-    }
+    public boolean cancelVisit(String category, String siteName, String visitorId){
+        if (category == null || siteName == null || visitorId == null)
+            return false;
+        if (category.isBlank() || siteName.isBlank() || visitorId.isBlank())
+            return false; //line 67-68 are just validators in order to make sure there is something to delete
+        Iterator<Visit> pointer = allVisits.iterator();
+        visitorId = visitorId.trim();
+        siteName = siteName.trim();
+        category = category.trim();
+        while (pointer.hasNext()){
+            Visit v = pointer.next(); // v is the current visit it is pointing at
+            // hasNext() checks if theres an element after the current one
+            // Next moves the pointer to the next element
+            // the following loop is to compare using the getters in "Visit" to make sure we are deleting the correct visit, and it gives the metehod a return value
+            if (
+                    v.getCategory().equalsIgnoreCase(category) &&
+                            v.getSiteName().equalsIgnoreCase(siteName) &&
+                            v.getVisitorId().equalsIgnoreCase(visitorId)
+            ){
+                pointer.remove();//Safe Deletion, not masking.
+                recentBookings.remove(v);
+                return true;
+            }
 
-}
-return false;
-
+        }
+        return false;
     }
 
     // Option 4: View Visits (Return list for UI) -Rami
@@ -192,7 +225,7 @@ return false;
     }
 
 
-// Option 5: Display Totals (Return String for UI)- Rami
+    // Option 5: Display Totals (Return String for UI)- Rami
     public String displayTotals() {
         StringBuilder bob = new StringBuilder();
         bob.append("--- System Totals ---\n");
@@ -237,16 +270,17 @@ return false;
         return bob.toString();
     }
 
-/*Option 6, searching for a visitor - Aran
-  The method creates a new linked lists which acts like a basket in order to display the
-  results of the search to the user.
-*/
+    //Option 6, searching for a visitor - Aran
+    /*
+      The method creates a new linked lists which acts like a basket in order to display the
+      results of the search to the user.
+    */
     public LinkedList<Visit> searchVisitor(String visitorId, String visitorName){
 
-    /* the following is to create the new temporary linked list
-       it is also worthy to note that a visitor can have several visits, that is why an ordinary string is not
-       being made but instead a linked list
-    */
+        /* the following is to create the new temporary linked list
+           it is also worthy to note that a visitor can have several visits, that is why an ordinary string is not
+           being made but instead a linked list
+        */
         LinkedList<Visit> SearchResult = new LinkedList<>();
 
         boolean hasId = visitorId != null && !visitorId.isBlank();
@@ -288,7 +322,8 @@ return false;
     }
 
 
-    /* Option 7: Get the most recently scheduled visits - Aran
+    // Option 7: Get the most recently scheduled visits - Aran
+    /*
        This method returns the latest bookings (up to 10) in newest-to-oldest order.
        It returns a LinkedList so the UI can display the results (e.g., in a TableView)
        instead of printing directly to the console.
@@ -336,8 +371,8 @@ return false;
         // Return the list of recent visits to be displayed by the UI
         return result;
     }
-    // Option 8 - Rami
-// Option 8: Summary Report (Return String for UI)
+
+    // Option 8: Summary Report (Return String for UI) -Rami
     public String generateSummaryReport() {
 
         StringBuilder bob = new StringBuilder();
@@ -412,6 +447,15 @@ return false;
         return bob.toString();
     }
 
+    private void clearInputs() {
+        nameField.clear();
+        idField.clear();
+        phoneField.clear();
+        datePicker.setValue(null);
+        categoryBox.getSelectionModel().clearSelection();
+        siteBox.getItems().clear(); // Clears the dependent dropdown too
+    }
+
     // These methods run when you click the buttons in the GUI.
 
     @FXML
@@ -427,10 +471,19 @@ return false;
         );
         // 2. Show the result in the big text area
         feedbackArea.setText(result);
+        if (!result.startsWith("Error")) {
+            clearInputs();
+        }
     }
 
     @FXML
     void onCancelClick() {
+
+        if (categoryBox.getValue() == null || siteBox.getValue() == null || idField.getText().isBlank()) {
+            feedbackArea.setText("Error: Please select a category, site, and enter visitor ID.");
+            return; // stop further execution because of empty values
+        }
+
         boolean success = cancelVisit(categoryBox.getValue(), siteBox.getValue(), idField.getText());
 
         if (success) {
@@ -470,10 +523,13 @@ return false;
 
         // 1. Call your logic method (It handles sorting & filtering now)
         LinkedList<Visit> data = viewVisits(cat, ascendingCheck.isSelected());
-
-        // 2. Give the list to the Table
-        resultsTable.getItems().setAll(data);
-        feedbackArea.setText("Showing " + data.size() + " visits for " + cat);
+        if (data.isEmpty()) {
+            feedbackArea.setText("No visits found for this category.");
+        } else {
+            // 2. Give the list to the Table
+            resultsTable.getItems().setAll(data);
+            feedbackArea.setText("Showing " + data.size() + " visits for " + cat);
+        }
     }
 
     @FXML

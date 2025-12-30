@@ -3,7 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+
 <!-- This represents the body of our GUI -->
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.ramiaran.heritagesitesystem.HeritageController"
             prefHeight="720.0" prefWidth="1080.0">
@@ -28,31 +32,75 @@
 
             <Label text="Visitor Details"/>
             <!-- text and date input fields -->
-            <TextField fx:id="nameField" promptText="Full Name"/>
-            <TextField fx:id="idField" promptText="Visitor ID"/>
-            <TextField fx:id="phoneField" promptText="Phone Number"/>
-            <DatePicker fx:id="datePicker" maxWidth="Infinity" promptText="Select Date"/>
+            <TextField fx:id="nameField" promptText="Full Name">
+                <tooltip>
+                    <Tooltip text="Enter the full name of the visitor"/>
+                </tooltip>
+            </TextField>
+            <TextField fx:id="idField" promptText="Visitor ID">
+                <tooltip>
+                    <Tooltip text="Enter the visitor's numeric ID"/>
+                </tooltip>
+            </TextField>
+            <TextField fx:id="phoneField" promptText="Phone Number">
+                <tooltip>
+                    <Tooltip text="Enter an 11-digit Iraqi phone number"/>
+                </tooltip>
+            </TextField>
+            <DatePicker fx:id="datePicker" maxWidth="Infinity" promptText="Select Date">
+                <tooltip>
+                    <Tooltip text="Pick the date of the visit"/>
+                </tooltip>
+            </DatePicker>
 
             <Separator/>
 
             <Label text="Site Selection"/>
             <!-- comboboxes are like selection dropdown menu -->
-            <ComboBox fx:id="categoryBox" maxWidth="Infinity" promptText="1. Select Category"/>
-            <ComboBox fx:id="siteBox" maxWidth="Infinity" promptText="2. Select Site"/>
+            <ComboBox fx:id="categoryBox" maxWidth="Infinity" promptText="1. Select Category">
+                <tooltip>
+                    <Tooltip text="Choose the category of the heritage site"/>
+                </tooltip>
+            </ComboBox>
+            <ComboBox fx:id="siteBox" maxWidth="Infinity" promptText="2. Select Site">
+                <tooltip>
+                    <Tooltip text="Choose the specific site to visit"/>
+                </tooltip>
+            </ComboBox>
 
             <Separator/>
             <!-- these are buttons that should handle some logic when clicked -->
             <Button text="Schedule Visit (Option 2)" onAction="#onScheduleClick"
-                    style="-fx-background-color: #27ae60; -fx-text-fill: white;" maxWidth="Infinity"/>
-
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white;" maxWidth="Infinity">
+                <tooltip>
+                    <Tooltip text="Click to schedule a visit with the above information"/>
+                </tooltip>
+            </Button>
             <Button text="Cancel Visit (Option 3)" onAction="#onCancelClick"
-                    style="-fx-background-color: #e67e22; -fx-text-fill: white;" maxWidth="Infinity"/>
+                    style="-fx-background-color: #ef4e22; -fx-text-fill: white;" maxWidth="Infinity">
+                <tooltip>
+                    <Tooltip text="Click to cancel a previously scheduled visit"/>
+                </tooltip>
+            </Button>
+            <Region prefHeight="20"/>
 
+            <!-- UKH Logo centered -->
+            <HBox alignment="CENTER">
+                <ImageView fx:id="ukhLogo" fitWidth="200" preserveRatio="true" pickOnBounds="true">
+                    <image>
+                        <Image url="@ukh-logo.png"/>
+                    </image>
+                </ImageView>
+            </HBox>
             <Region VBox.vgrow="ALWAYS"/>
 
             <Separator/>
             <Button text="EXIT SYSTEM (Option 0)" onAction="#onExitClick"
-                    style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold;" maxWidth="Infinity"/>
+                    style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold;" maxWidth="Infinity">
+                <tooltip>
+                    <Tooltip text="Click to exit the program"/>
+                </tooltip>
+            </Button>
         </VBox>
     </left>
     <!-- central region of the screen -->
@@ -62,7 +110,11 @@
                 <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #dfe6e9; -fx-padding: 10;">
                     <Label text="Search:"/>
                     <TextField fx:id="searchField" promptText="Enter name or ID" HBox.hgrow="ALWAYS"/>
-                    <Button text="Search (Opt 6)" onAction="#onSearchClick"/>
+                    <Button text="Search (Opt 6)" onAction="#onSearchClick">
+                        <tooltip>
+                            <Tooltip text="Click to search a visitor by name or ID (stalker😈)"/>
+                        </tooltip>
+                    </Button>
                 </HBox>
 
                 <TableView fx:id="resultsTable" VBox.vgrow="ALWAYS">
@@ -77,15 +129,19 @@
                     </columnResizePolicy>
                 </TableView>
 
-                <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 5;">
+                <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 5;">
                     <Label text="Filter:"/>
                     <ComboBox fx:id="viewCategoryBox" prefWidth="120"/>
                     <CheckBox fx:id="ascendingCheck" text="Asc"/>
                     <Button text="View List (Opt 4)" onAction="#onViewVisitsClick"/>
                 </HBox>
+                <HBox alignment="CENTER_RIGHT">
+                    <Label text="© 2025 Rami Ali - Aran Khalid - UKH. All rights reserved."
+                           style="-fx-font-size: 11; -fx-text-fill: black"/>
+                </HBox>
             </VBox>
 
-            <VBox spacing="15" style="-fx-padding: 15; -fx-background-color: #f5f6fa;">
+            <VBox spacing="15" style="-fx-padding: 35; -fx-background-color: #f5f6fa;">
                 <Label text="SYSTEM REPORTS" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
                 <Button text="Recent Bookings (Opt 7)" onAction="#onRecentClick" maxWidth="Infinity"/>

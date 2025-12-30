@@ -77,7 +77,7 @@
                 </tooltip>
             </Button>
             <Button text="Cancel Visit (Option 3)" onAction="#onCancelClick"
-                    style="-fx-background-color: #e67e22; -fx-text-fill: white;" maxWidth="Infinity">
+                    style="-fx-background-color: #ef4e22; -fx-text-fill: white;" maxWidth="Infinity">
                 <tooltip>
                     <Tooltip text="Click to cancel a previously scheduled visit"/>
                 </tooltip>
@@ -129,15 +129,19 @@
                     </columnResizePolicy>
                 </TableView>
 
-                <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 5;">
+                <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 5;">
                     <Label text="Filter:"/>
                     <ComboBox fx:id="viewCategoryBox" prefWidth="120"/>
                     <CheckBox fx:id="ascendingCheck" text="Asc"/>
                     <Button text="View List (Opt 4)" onAction="#onViewVisitsClick"/>
                 </HBox>
+                <HBox alignment="CENTER_RIGHT">
+                    <Label text="© 2025 Rami Ali - Aran Khalid - UKH. All rights reserved."
+                           style="-fx-font-size: 11; -fx-text-fill: #black"/>
+                </HBox>
             </VBox>
 
-            <VBox spacing="15" style="-fx-padding: 15; -fx-background-color: #f5f6fa;">
+            <VBox spacing="15" style="-fx-padding: 35; -fx-background-color: #f5f6fa;">
                 <Label text="SYSTEM REPORTS" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
                 <Button text="Recent Bookings (Opt 7)" onAction="#onRecentClick" maxWidth="Infinity"/>

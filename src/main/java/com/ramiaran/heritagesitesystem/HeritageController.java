@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.Iterator;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
 
 public class HeritageController {
 
@@ -518,6 +521,17 @@ public class HeritageController {
             feedbackArea.setText("Error: Please select a category, site, and enter visitor ID.");
             clearInputs();
             return; // stop further execution because of empty values
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirm Cancellation");
+        confirm.setHeaderText(null);
+        confirm.setContentText("Are you sure you want to cancel this visit?");
+
+        Optional<ButtonType> result = confirm.showAndWait();
+        if (result.isEmpty() || result.get() != ButtonType.OK) {
+            feedbackArea.setText("Cancellation aborted.");
+            return; // user pressed Cancel or closed the dialog
         }
 
         boolean success = cancelVisit(categoryBox.getValue(), siteBox.getValue(), idField.getText());

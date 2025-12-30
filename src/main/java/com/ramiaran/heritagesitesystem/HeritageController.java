@@ -118,6 +118,11 @@ public class HeritageController {
         if (date.isBefore(java.time.LocalDate.now())) {
             return "Error: You cannot book a visit in the past.";
         }
+        //we will use Regex to validate the input text
+        if (!name.matches("[a-zA-Z\\s]+")) {
+            return "Error: Name must contain letters and spaces only.";
+        }
+
         if (!phone.matches("07\\d{9}")) {
             return "Error: Phone number must be exactly 11 digits and an Iraqi number.";
         }
@@ -334,13 +339,16 @@ public class HeritageController {
                 */
                 }
             }
-            return SearchResult;
-        }
 
-        for (Visit v : allVisits){
-            if (v.getVisitorName().toLowerCase().equals(visitorName.trim().toLowerCase())){
-                SearchResult.add(v);
+        }
+        if (hasName) {
+
+            for (Visit v : allVisits) {
+                if (v.getVisitorName().toLowerCase().equals(visitorName.trim().toLowerCase())) {
+                    SearchResult.add(v);
+                }
             }
+
         }
         return SearchResult;
     }

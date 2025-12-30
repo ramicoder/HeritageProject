@@ -137,7 +137,7 @@
                 </HBox>
                 <HBox alignment="CENTER_RIGHT">
                     <Label text="© 2025 Rami Ali - Aran Khalid - UKH. All rights reserved."
-                           style="-fx-font-size: 11; -fx-text-fill: #black"/>
+                           style="-fx-font-size: 11; -fx-text-fill: black"/>
                 </HBox>
             </VBox>
 

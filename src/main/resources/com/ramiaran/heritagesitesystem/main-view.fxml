@@ -131,9 +131,21 @@
 
                 <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 5;">
                     <Label text="Filter:"/>
-                    <ComboBox fx:id="viewCategoryBox" prefWidth="120"/>
-                    <CheckBox fx:id="ascendingCheck" text="Asc"/>
-                    <Button text="View List (Opt 4)" onAction="#onViewVisitsClick"/>
+                    <ComboBox fx:id="viewCategoryBox" prefWidth="120">
+                        <tooltip>
+                            <Tooltip text="Click to filter out a category"/>
+                        </tooltip>
+                    </ComboBox>
+                    <CheckBox fx:id="ascendingCheck" text="Asc">
+                        <tooltip>
+                            <Tooltip text="Click to display bookings in ascending order"/>
+                        </tooltip>
+                    </CheckBox>
+                    <Button text="View List (Opt 4)" onAction="#onViewVisitsClick">
+                        <tooltip>
+                            <Tooltip text="Click to view bookings to the filtered category"/>
+                        </tooltip>
+                    </Button>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT">
                     <Label text="© 2025 Rami Ali - Aran Khalid - UKH. All rights reserved."
@@ -144,9 +156,21 @@
             <VBox spacing="15" style="-fx-padding: 35; -fx-background-color: #f5f6fa;">
                 <Label text="SYSTEM REPORTS" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
-                <Button text="Recent Bookings (Opt 7)" onAction="#onRecentClick" maxWidth="Infinity"/>
-                <Button text="System Totals (Opt 5)" onAction="#onTotalsClick" maxWidth="Infinity"/>
-                <Button text="Summary Report (Opt 8)" onAction="#onSummaryClick" maxWidth="Infinity"/>
+                <Button text="Recent Bookings (Opt 7)" onAction="#onRecentClick" maxWidth="Infinity">
+                    <tooltip>
+                        <Tooltip text="Click to view the last 10 bookings"/>
+                    </tooltip>
+                </Button>
+                <Button text="System Totals (Opt 5)" onAction="#onTotalsClick" maxWidth="Infinity">
+                    <tooltip>
+                        <Tooltip text="Click to view total bookings for all categories and sites in the system log"/>
+                    </tooltip>
+                </Button>
+                <Button text="Summary Report (Opt 8)" onAction="#onSummaryClick" maxWidth="Infinity">
+                    <tooltip>
+                        <Tooltip text="Click to view the category and site with most bookings"/>
+                    </tooltip>
+                </Button>
 
                 <Separator/>
 

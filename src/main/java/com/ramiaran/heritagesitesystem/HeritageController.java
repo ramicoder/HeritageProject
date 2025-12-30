@@ -410,15 +410,16 @@ public class HeritageController {
     public String generateSummaryReport() {
 
         if (allVisits.isEmpty()) {
-            return "--- Intelligence Report ---\nNo visits recorded yet.";
+            return "--- Summary Report ---\nNo visits recorded yet.";
         }
 
         StringBuilder bob = new StringBuilder();
-        bob.append("--- Intelligence Report ---\n");
+        bob.append("--- Summary Report ---\n");
 
         // --- Find Top Category ---
-        String topCategory = "None";
         int maxCatCount = -1;
+        LinkedList<String> topCategories = new LinkedList<>();
+
 
         // Get unique categories manually using a new linked list
         // also no worries if matches same name as another linked list because this is declared locally so the scoping took care of that
@@ -448,19 +449,22 @@ public class HeritageController {
             // we find the name for the category with most visits and its visit count
             if (count > maxCatCount) {
                 maxCatCount = count;
-                topCategory = cat;
+                topCategories.clear();
+                topCategories.add(cat);
+            } else if (count == maxCatCount) {
+                topCategories.add(cat);
             }
         }
 
         bob.append("Top Category: ")
-                .append(topCategory)
+                .append(String.join(", ", topCategories))
                 .append(" (")
                 .append(maxCatCount)
                 .append(" visits)\n");
 
         // same logic as above but with site
-        String topSite = "None";
         int maxSiteCount = -1;
+        LinkedList<String> topSites = new LinkedList<>();
 
         for (HeritageSite site : allSites) {
             int count = 0;
@@ -472,12 +476,15 @@ public class HeritageController {
 
             if (count > maxSiteCount) {
                 maxSiteCount = count;
-                topSite = site.getName();
+                topSites.clear();
+                topSites.add(site.getName());
+            } else if (count == maxSiteCount) {
+                topSites.add(site.getName());
             }
         }
 
         bob.append("Top Site:     ")
-                .append(topSite)
+                .append(String.join(", ", topSites))
                 .append(" (")
                 .append(maxSiteCount)
                 .append(" visits)\n");

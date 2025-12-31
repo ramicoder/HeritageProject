@@ -1,5 +1,31 @@
 package com.ramiaran.heritagesitesystem;
 
+
+/*
+ * ----------------------------------------------------------------------------
+ * PROJECT: UKH Heritage Management System
+ * FILE:    Rami_Aran.java
+ * DATE:    31/12/2025
+ * ----------------------------------------------------------------------------
+ * TEAM MEMBERS & CONTRIBUTIONS:
+ *
+ * 1. Rami Ali
+ * - Major: Software Engineering (SE S3)
+ * - Contributions:
+ * - Designed and implemented the User Interface (JavaFX/FXML).
+ * - Implemented HeritageSite class logic.
+ * - Developed Logic for Options 2, 4, 5, and 8.
+ * - Handled FXML Controller methods and event linking.
+ *
+ * 2. Aran Razwan Khalid
+ * - Major: Computer Engineering (CE)
+ * - Contributions:
+ * - Implemented the Visit class structure.
+ * - Developed Logic for Options 1, 3, 6, 7, and 9.
+ * - Handled core data processing and validation logic.
+ * ----------------------------------------------------------------------------
+ */
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -25,7 +51,8 @@ public class HeritageController {
     @FXML private javafx.scene.control.TextArea feedbackArea;        // The big text box at the bottom for messages/errors
     @FXML private javafx.scene.control.TextField searchField;        // Input for search
     @FXML private javafx.scene.control.CheckBox ascendingCheck;      // Checkbox for sorting
-    @FXML private javafx.scene.control.ComboBox<String> viewCategoryBox; // Filter dropdown for Option 4
+    @FXML private javafx.scene.control.ComboBox<String> viewCategoryBox;
+    // Filter dropdown for Option 4
 
     // This is for the tableview holding value of the visit object we made
     @FXML private javafx.scene.control.TableView<Visit> resultsTable;
@@ -544,7 +571,7 @@ public class HeritageController {
         boolean success = cancelVisit(categoryBox.getValue(), siteBox.getValue(), idField.getText());
 
         if (success) {
-            feedbackArea.setText("Success: Visit for visitor " + idField.getText() + " has been cancelled.");
+            feedbackArea.setText("Success: Visit for visitor " + idField.getText() + "  been cancelled.");
         } else {
             feedbackArea.setText("Error: Could not cancel. Check Category, Site, and ID.");
         }

@@ -163,7 +163,7 @@ public class HeritageController {
         name = name.trim();
         id = id.trim();
         phone = phone.trim();
-        // VALIDATION: Check for ID Conflict
+        // we validate id integrity conflict
         for (Visit v : allVisits) {
             if (v.getVisitorId().equalsIgnoreCase(id)) {
                 // We found the ID. Now ensure the name matches the original owner.
@@ -186,7 +186,7 @@ public class HeritageController {
             }
         }
 
-        // 1. counting how many times the visitor visited based on the id
+        // we count the visits based on the id
         int count = 0;
         for (Visit v : allVisits) {
             if (v.getVisitorId().equalsIgnoreCase(id)) {
@@ -194,34 +194,34 @@ public class HeritageController {
             }
         }
 
-        // 2. if visitor count reached 2 or more, generate verification code
+        // if visitor count reached 2 or more, generate verification code
         if (count >= 2) {
             int code = 100000 + new java.util.Random().nextInt(900000);
             bob.append("You are qualified for a free guided tour! The following code is your reference\n");
             bob.append("Confirmation Code sent to ").append(phone).append(": ").append(code).append("\n");
         }
 
-        // 3. Create the Visit object
+        // we then create the Visit object using the visit class aran created
         Visit newVisit = new Visit(category, siteName, name, id, phone, date);
 
-        // 4. Adding the new visit to the bookings stack and all visits linked list
+        // we add the new visit to the bookings stack
         allVisits.add(newVisit);
         recentBookings.push(newVisit);
 
-        // 5. Final Success Message
+        // we finalize our success message
         bob.append("Scheduled: ").append(name).append(" to ").append(siteName);
 
         // Return String for UI
         return bob.toString();
     }
 
-    // Option 2 Helper: Used by the UI to filter sites in the Dropdown
+    // Option 2 helper method: used by the UI to filter sites in the Dropdown
     public java.util.List<String> getSiteNamesByCategory(String category) {
         java.util.List<String> names = new java.util.ArrayList<>();
 
         // Loop through all sites
         for (HeritageSite site : allSites) {
-            // if the site matches the category (e.g., "Museum"), add its name to the list
+            // if the site matches its category, add its name to the list
             if (site.getCategory().equalsIgnoreCase(category)) {
                 names.add(site.getName());
             }
@@ -261,7 +261,7 @@ public class HeritageController {
     // Option 4: View Visits (Return list for UI) -Rami
     public LinkedList<Visit> viewVisits(String category, boolean ascending) {
 
-        // 1. Filter: specific category only
+        // here we filter the specific category only
         // We use a temporary list so we don't mess up the main 'allVisits' list
         LinkedList<Visit> filteredList = new LinkedList<>();
         for (Visit v : allVisits) {
@@ -271,7 +271,7 @@ public class HeritageController {
             }
         }
 
-        // 2. Sort: Explicit Comparator
+        // we then proceed to sorting
         //soring with timsort(a combination of merge and insertion sort with a big O of Nlog(N))
         //the lamba expression is its syntax which sorts based on the compareto values when comparing the dates
         filteredList.sort((v1, v2) -> {
@@ -290,7 +290,7 @@ public class HeritageController {
         StringBuilder bob = new StringBuilder();
         bob.append("--- System Totals ---\n");
 
-        // 1. Get unique categories
+        // we get unique categories into a linked list
         LinkedList<String> categories = new LinkedList<>(); // We did an Array initially, but AI recommended that we use a linked list for cleanliness and efficiency.
         for (HeritageSite site : allSites) { //we traverse through all sites and get the unique categories instead of having redundancy
             boolean exists = false;
@@ -303,9 +303,9 @@ public class HeritageController {
             if (!exists) categories.add(site.getCategory());
         }
 
-        // 2. Loop through Categories
+        // we loop through the categories
         for (String cat : categories) {
-            // Count total visits for this category
+            // count total visits for this category
             int catCount = 0;
             for (Visit v : allVisits) {
                 if (v.getCategory().equalsIgnoreCase(cat)) {
@@ -314,7 +314,7 @@ public class HeritageController {
             }
             bob.append(cat).append(": ").append(catCount).append(" total visits\n");
 
-            // 3. same logic as for category but for sites now
+            //  same logic as for category but for sites now
             for (HeritageSite site : allSites) {
                 if (site.getCategory().equalsIgnoreCase(cat)) {
                     int siteCount = 0;
@@ -347,13 +347,13 @@ public class HeritageController {
         //This is to check if the user provided valid ID to search for
 
         boolean hasName = visitorName != null && !visitorName.isBlank();
-        // this is to checl if the user provided a valid Name that is stored
+        // this is to check if the user provided a valid Name that is stored
 
         if (!hasId && !hasName){
             return SearchResult;
         }
 
-    /* The following portion is to prioritize ID search over Name seaarch, although it will still search for the
+    /* The following portion is to prioritize ID search over Name search, although it will still search for the
        name, the Id is prioritized over it
     */
         if (hasId) {
@@ -473,7 +473,7 @@ public class HeritageController {
                     count++;
                 }
             }
-            // we find the name for the category with most visits and its visit count
+            // we find the name/s for the category with most visits and its visit count
             if (count > maxCatCount) {
                 maxCatCount = count;
                 topCategories.clear();
@@ -532,7 +532,7 @@ public class HeritageController {
 
     @FXML
     void onScheduleClick() {
-        // 1. Call the existing logic method
+        // call our exisiting method
         String result = scheduleVisit(
                 categoryBox.getValue(),
                 siteBox.getValue(),
@@ -541,7 +541,7 @@ public class HeritageController {
                 phoneField.getText(),
                 datePicker.getValue()
         );
-        // 2. Show the result in the big text area
+        // updating the feedback area after the operation
         feedbackArea.setText(result);
         if (!result.startsWith("Error")) {
             clearInputs();
@@ -557,6 +557,7 @@ public class HeritageController {
             return; // stop further execution because of empty values
         }
 
+        //confirmation logic done in case the user accidentally clicked the cancel visit button
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirm Cancellation");
         confirm.setHeaderText(null);
@@ -580,20 +581,20 @@ public class HeritageController {
 
     @FXML
     void onExitClick() {
-        // This is real logic: It shuts down the Java program.
+        // This is the logic for option 9, terminating the program.
         System.exit(0);
     }
 
     @FXML
     void onSearchClick() {
-        // 1. Get the list from your logic
+        // get the list from our searchvisitor method
         java.util.LinkedList<Visit> found = searchVisitor(searchField.getText(), searchField.getText());
 
-        // 2. Clear table and add new data
+        // clear our table and add the data we just got
         resultsTable.getItems().clear();
         resultsTable.getItems().addAll(found);
 
-        // 3. User feedback
+        // update the feedback area after the operation is done
         if(found.isEmpty()) feedbackArea.setText("Search: No visitors found.");
         else feedbackArea.setText("Search: Found " + found.size() + " records.");
 
@@ -609,12 +610,12 @@ public class HeritageController {
             return;
         }
 
-        // 1. Call your logic method (It handles sorting & filtering now)
+        // calling our viewvisits method to handle sorting
         LinkedList<Visit> data = viewVisits(cat, ascendingCheck.isSelected());
         if (data.isEmpty()) {
             feedbackArea.setText("No visits found for this category.");
         } else {
-        // 2. Give the list to the Table
+        // update the table with the linked list we created
         resultsTable.getItems().setAll(data);
         feedbackArea.setText("Showing " + data.size() + " visits for " + cat);
         }
@@ -622,12 +623,12 @@ public class HeritageController {
 
     @FXML
     void onRecentClick() {
-        // 1. Get the list from your existing method
+        // get access to our linked list using our recentvisits method
         java.util.LinkedList<Visit> recent = getRecentVisits();
 
-        // 2. Update Table
+        // 2. update our table
         resultsTable.getItems().setAll(recent);
-        // 3. Update feedback area
+        // 3. update the feedback area  after operation
         if (recent.isEmpty()) {
             feedbackArea.setText("No recent bookings yet.");
         } else {

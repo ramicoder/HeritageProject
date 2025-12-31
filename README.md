@@ -27,7 +27,7 @@ The system provides a Graphical User Interface (GUI) to handle the following ope
     * **Recent Activity:** View the most recently scheduled visits (LIFO).
 
 ## 🛠️ Technologies Used
-* **Language:** Java (JDK 21)
+* **Language:** Java (JDK 23)
 * **UI Framework:** JavaFX (FXML)
 * **IDE:** IntelliJ IDEA
 
@@ -43,7 +43,7 @@ The project demonstrates the practical application of the following structures:
 * **Rationale:** Follows the **Last-In-First-Out (LIFO)** principle, making it the perfect structure to display the most recently added visits at the top of the list.
 
 ## 📂 Design & Architecture
-* **MVC Pattern:** The system separates the User Interface (`Heritage.fxml`) from the logic.
+* **MVC Pattern:** The system separates the User Interface (`main-view.fxml`) from the logic.
 * **Backend Logic:** All data processing is handled in `HeritageController.java`. The UI communicates with backend methods without duplicating logic.
 
 ## 📝 Note to Grader regarding File Naming

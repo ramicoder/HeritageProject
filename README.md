@@ -52,4 +52,4 @@ Per assignment requirements for the solution file name:
 * The **Core Logic** is located in: **`HeritageController.java`**
 
 ## ⚖️ Academic Integrity
-AI tools were used transparently to assist with refining code readability, debugging specific errors, and clarifying logic explanations. All core
+AI tools were used transparently to assist with refining code readability, debugging specific errors, and clarifying logic explanations. All core algorithms, structural decisions, and implementation logic were designed and written by the project authors.

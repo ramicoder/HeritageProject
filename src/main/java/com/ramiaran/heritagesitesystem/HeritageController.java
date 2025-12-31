@@ -2,11 +2,11 @@ package com.ramiaran.heritagesitesystem;
 
 
 /*
- * ----------------------------------------------------------------------------
+
  * PROJECT: UKH Heritage Management System
  * FILE:    Rami_Aran.java
  * DATE:    31/12/2025
- * ----------------------------------------------------------------------------
+
  * TEAM MEMBERS & CONTRIBUTIONS:
  *
  * 1. Rami Ali
@@ -23,7 +23,7 @@ package com.ramiaran.heritagesitesystem;
  * - Implemented the Visit class structure.
  * - Developed Logic for Options 1, 3, 6, 7, and 9.
  * - Handled core data processing and validation logic.
- * ----------------------------------------------------------------------------
+
  */
 
 import javafx.fxml.FXML;
@@ -646,5 +646,4 @@ public class HeritageController {
         String report = generateSummaryReport();
         feedbackArea.setText(report);
     }
-
 }

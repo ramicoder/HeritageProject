@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="34cabb51-2552-485f-ab94-eb3b3e64f8d7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +53,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.HeritageApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Rami_Aran.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
@@ -62,6 +62,7 @@
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/ramidaood/Desktop/Rami_Aran&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -74,10 +75,23 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Rami_Aran">
     <configuration name="HeritageApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ramiaran.heritagesitesystem.HeritageApp" />
-      <module name="heritage-site-system" />
+      <module name="Rami_Aran" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ramiaran.heritagesitesystem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Rami_Aran" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ramiaran.heritagesitesystem.Rami_Aran" />
+      <module name="Rami_Aran" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ramiaran.heritagesitesystem.*" />
@@ -101,6 +115,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Rami_Aran" />
         <item itemvalue="Application.HeritageApp" />
       </list>
     </recent_temporary>
@@ -130,6 +145,8 @@
       <workItem from="1766866714580" duration="5508000" />
       <workItem from="1766911376854" duration="30625000" />
       <workItem from="1767172055453" duration="3921000" />
+      <workItem from="1767178735664" duration="24000" />
+      <workItem from="1767178764341" duration="16000" />
     </task>
     <servers />
   </component>

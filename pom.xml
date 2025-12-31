@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ramiaran</groupId>
-    <artifactId>heritage-site-system</artifactId>
+    <artifactId>Rami_Aran</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>HeritageProject</name>
 
@@ -76,7 +76,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.ramiaran.heritagesitesystem.HeritageApp
+                                com.ramiaran.heritagesitesystem.Rami_Aran
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

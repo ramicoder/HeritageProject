@@ -1,0 +1,159 @@
+Index: src/main/java/com/ramiaran/heritagesitesystem/HeritageApp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/ramiaran/heritagesitesystem/HeritageApp.java b/src/main/java/com/ramiaran/heritagesitesystem/Rami_Aran.java
+rename from src/main/java/com/ramiaran/heritagesitesystem/HeritageApp.java
+rename to src/main/java/com/ramiaran/heritagesitesystem/Rami_Aran.java
+--- a/src/main/java/com/ramiaran/heritagesitesystem/HeritageApp.java	(revision 28da7555b2c6a13a4246573d50619796817aed54)
++++ b/src/main/java/com/ramiaran/heritagesitesystem/Rami_Aran.java	(date 1767178035882)
+@@ -6,10 +6,10 @@
+ 
+ import java.io.IOException;
+ 
+-public class HeritageApp extends Application {
++public class Rami_Aran extends Application {
+     @Override
+     public void start(Stage stage) throws IOException {
+-        FXMLLoader fxmlLoader = new FXMLLoader(HeritageApp.class.getResource("main-view.fxml"));
++        FXMLLoader fxmlLoader = new FXMLLoader(Rami_Aran.class.getResource("main-view.fxml"));
+         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+         stage.setTitle("Heritage Site");
+         stage.setScene(scene);
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>com.ramiaran</groupId>\n    <artifactId>heritage-site-system</artifactId>\n    <version>1.0-SNAPSHOT</version>\n    <name>HeritageProject</name>\n\n    <properties>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n        <junit.version>5.10.2</junit.version>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.openjfx</groupId>\n            <artifactId>javafx-controls</artifactId>\n            <version>23</version>\n        </dependency>\n        <dependency>\n            <groupId>org.openjfx</groupId>\n            <artifactId>javafx-fxml</artifactId>\n            <version>23</version>\n        </dependency>\n        <dependency>\n            <groupId>org.controlsfx</groupId>\n            <artifactId>controlsfx</artifactId>\n            <version>11.2.1</version>\n        </dependency>\n        <dependency>\n            <groupId>net.synedra</groupId>\n            <artifactId>validatorfx</artifactId>\n            <version>0.5.0</version>\n            <exclusions>\n                <exclusion>\n                    <groupId>org.openjfx</groupId>\n                    <artifactId>*</artifactId>\n                </exclusion>\n            </exclusions>\n        </dependency>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter-api</artifactId>\n            <version>${junit.version}</version>\n            <scope>test</scope>\n        </dependency>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter-engine</artifactId>\n            <version>${junit.version}</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-compiler-plugin</artifactId>\n                <version>3.13.0</version>\n                <configuration>\n                    <source>23</source>\n                    <target>23</target>\n                </configuration>\n            </plugin>\n            <plugin>\n                <groupId>org.openjfx</groupId>\n                <artifactId>javafx-maven-plugin</artifactId>\n                <version>0.0.8</version>\n                <executions>\n                    <execution>\n                        <!-- Default configuration for running with: mvn clean javafx:run -->\n                        <id>default-cli</id>\n                        <configuration>\n                            <mainClass>\n                                com.ramiaran.heritagesitesystem.HeritageApp\n                            </mainClass>\n                            <launcher>app</launcher>\n                            <jlinkZipName>app</jlinkZipName>\n                            <jlinkImageName>app</jlinkImageName>\n                            <noManPages>true</noManPages>\n                            <stripDebug>true</stripDebug>\n                            <noHeaderFiles>true</noHeaderFiles>\n                        </configuration>\n                    </execution>\n                </executions>\n            </plugin>\n        </plugins>\n    </build>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 28da7555b2c6a13a4246573d50619796817aed54)
++++ b/pom.xml	(date 1767178035878)
+@@ -5,7 +5,7 @@
+     <modelVersion>4.0.0</modelVersion>
+ 
+     <groupId>com.ramiaran</groupId>
+-    <artifactId>heritage-site-system</artifactId>
++    <artifactId>Rami_Aran</artifactId>
+     <version>1.0-SNAPSHOT</version>
+     <name>HeritageProject</name>
+ 
+@@ -76,7 +76,7 @@
+                         <id>default-cli</id>
+                         <configuration>
+                             <mainClass>
+-                                com.ramiaran.heritagesitesystem.HeritageApp
++                                com.ramiaran.heritagesitesystem.Rami_Aran
+                             </mainClass>
+                             <launcher>app</launcher>
+                             <jlinkZipName>app</jlinkZipName>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"34cabb51-2552-485f-ab94-eb3b3e64f8d7\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;AranRKh&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/ramicoder/HeritageProject.git&quot;,\n    &quot;accountId&quot;: &quot;208d1637-bdad-4562-8f28-ed34480fd157&quot;\n  }\n}</component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"generalSettings\">\n      <MavenGeneralSettings>\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\n      </MavenGeneralSettings>\n    </option>\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 1\n}</component>\n  <component name=\"ProjectId\" id=\"37FYfubmAuw5IKuKiAcHRlEh9jq\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,\n    &quot;Application.HeritageApp.executor&quot;: &quot;Run&quot;,\n    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RunManager\">\n    <configuration name=\"HeritageApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.ramiaran.heritagesitesystem.HeritageApp\" />\n      <module name=\"heritage-site-system\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"com.ramiaran.heritagesitesystem.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\n      <module name=\"HeritageProject\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\n      <module name=\"HeritageProject\" />\n      <option name=\"filePath\" />\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.HeritageApp\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121\" />\n        <option value=\"bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"34cabb51-2552-485f-ab94-eb3b3e64f8d7\" name=\"Changes\" comment=\"\" />\n      <created>1766500393512</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1766500393512</updated>\n      <workItem from=\"1766500394601\" duration=\"7652000\" />\n      <workItem from=\"1766672840388\" duration=\"4608000\" />\n      <workItem from=\"1766686094793\" duration=\"495000\" />\n      <workItem from=\"1766846252876\" duration=\"1428000\" />\n      <workItem from=\"1766847819266\" duration=\"10451000\" />\n      <workItem from=\"1766860178176\" duration=\"36000\" />\n      <workItem from=\"1766860544492\" duration=\"11000\" />\n      <workItem from=\"1766866714580\" duration=\"5508000\" />\n      <workItem from=\"1766911376854\" duration=\"30625000\" />\n      <workItem from=\"1767172055453\" duration=\"3921000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>\n          <line>605</line>\n          <option name=\"timeStamp\" value=\"10\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\n    <expand />\n    <select />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 28da7555b2c6a13a4246573d50619796817aed54)
++++ b/.idea/workspace.xml	(date 1767178185063)
+@@ -6,7 +6,8 @@
+   <component name="ChangeListManager">
+     <list default="true" id="34cabb51-2552-485f-ab94-eb3b3e64f8d7" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/Rami_Aran.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -50,34 +51,35 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.HeritageApp.executor&quot;: &quot;Run&quot;,
+-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.HelloApplication.executor": "Run",
++    "Application.HeritageApp.executor": "Run",
++    "ModuleVcsDetector.initialDetectionPerformed": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
++    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
++    "RunOnceActivity.git.unshallow": "true",
++    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
++    "git-widget-placeholder": "main",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "/Users/ramidaood/Desktop/HeritageProject",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Project",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.0",
++    "settings.editor.selected.configurable": "terminal",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+-    <configuration name="HeritageApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="com.ramiaran.heritagesitesystem.HeritageApp" />
+-      <module name="heritage-site-system" />
++    <configuration name="Rami_Aran" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.ramiaran.heritagesitesystem.Rami_Aran" />
++      <module name="Rami_Aran" />
+       <extension name="coverage">
+         <pattern>
+           <option name="PATTERN" value="com.ramiaran.heritagesitesystem.*" />
+@@ -101,7 +103,7 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.HeritageApp" />
++        <item itemvalue="Application.Rami_Aran" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -130,6 +132,7 @@
+       <workItem from="1766866714580" duration="5508000" />
+       <workItem from="1766911376854" duration="30625000" />
+       <workItem from="1767172055453" duration="3921000" />
++      <workItem from="1767177507247" duration="676000" />
+     </task>
+     <servers />
+   </component>
+@@ -152,7 +155,7 @@
+       <breakpoints>
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/src/main/java/com/ramiaran/heritagesitesystem/HeritageController.java</url>
+-          <line>605</line>
++          <line>631</line>
+           <option name="timeStamp" value="10" />
+         </line-breakpoint>
+       </breakpoints>

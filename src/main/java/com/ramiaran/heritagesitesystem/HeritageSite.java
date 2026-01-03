@@ -21,10 +21,4 @@ public class HeritageSite {
     public String getEra() { return era; }
     public String getCategory() { return category; }
     public String getDescription() { return description; }
-
-    // This helps print the site info nicely as a String
-    @Override
-    public String toString() {
-        return name + " (" + era + ") - " + location;
-    }
 }
